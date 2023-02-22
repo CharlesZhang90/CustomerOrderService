@@ -3,6 +3,7 @@ package com.lionsbot.demo.service;
 import java.util.List;
 import java.util.UUID;
 
+import org.hibernate.annotations.SQLDelete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,7 @@ import com.lionsbot.demo.dto.CustomerDTO;
 import com.lionsbot.demo.entity.Address;
 import com.lionsbot.demo.entity.Customer;
 import com.lionsbot.demo.entity.Role;
+import com.lionsbot.demo.exception.EntityAlreadyExistException;
 import com.lionsbot.demo.repository.CustomerRepository;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -41,6 +43,8 @@ public class CustomerServiceImpl implements CustomerService {
 	@Transactional
 	public Customer create(CustomerDTO customerDto, Role role) {
 		//check if customer existence base on email
+		customerRepository.findByCustomerName(customerDto.getCustomerName())
+						  .ifPresent((customer)-> {throw new EntityAlreadyExistException("Customer already Exists.");});
 		Customer customer = new Customer();
 		customer.setCustomerName(customerDto.getCustomerName());
 		customer.setEmail(customerDto.getEmail());
@@ -65,7 +69,12 @@ public class CustomerServiceImpl implements CustomerService {
 		customer.setPassword(passwordEncoder.encode(password));
 		customerRepository.save(customer);
 	}
-
+	/*
+	 * This is the delete customer function
+	 * It is a soft delete
+	 * Details please check customer entity
+	 * @SQLDelete is added to customer entity for soft deletion
+	 */
 	@Override
 	@Transactional
 	public void deleteById(UUID customerId) {

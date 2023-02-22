@@ -17,8 +17,16 @@ public class GlobalExceptionHandler {
 	@ExceptionHandler(EntityNotFoundException.class)
 	public ResponseEntity<?> entityNotFoundExceptionHandling(EntityNotFoundException exception){
 		ErrorDetails errorDetails = 
-				new ErrorDetails(LocalDate.now(), "Entity Not Found", exception.getMessage());
-		return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
+				new ErrorDetails(LocalDate.now(), "Resource Not Found", exception.getMessage());
+		return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
+	}
+	
+	// handling entity already exist exception
+	@ExceptionHandler(EntityAlreadyExistException.class)
+	public ResponseEntity<?> entityAlreadyExistException(EntityAlreadyExistException exception){
+		ErrorDetails errorDetails = 
+				new ErrorDetails(LocalDate.now(), "Entity already exist", exception.getMessage());
+		return new ResponseEntity<>(errorDetails, HttpStatus.IM_USED);
 	}
 	
 	// handling validation exception
@@ -28,4 +36,13 @@ public class GlobalExceptionHandler {
 				new ErrorDetails(LocalDate.now(), "Validation Error", exception.getMessage());
 		return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
 	}
+	
+//	// handling Other exceptions
+//	@ExceptionHandler(Exception.class)
+//	public ResponseEntity<?> globalExceptionHandling(Exception exception){
+//		ErrorDetails errorDetails = 
+//				new ErrorDetails(LocalDate.now(), "Other Service Error", exception.getMessage());
+//		return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
+//	}
+	
 }

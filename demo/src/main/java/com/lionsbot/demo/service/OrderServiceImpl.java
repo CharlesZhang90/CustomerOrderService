@@ -24,12 +24,6 @@ import jakarta.transaction.Transactional;
 @Service
 public class OrderServiceImpl implements OrderService {
 	
-	@Value("${estimated.shipping.date}")
-	private int shippingDate;
-	
-	@Value("${default.shipping.method}")
-	private String defaultShippingMethod;
-	
 	@Autowired
 	private OrderRepository orderRepository;
 	
@@ -86,7 +80,13 @@ public class OrderServiceImpl implements OrderService {
 		order.setNumberOfItems(orderUpdateDto.getNumberOfItems());
 		return orderRepository.save(order);
 	}
-
+	
+	/*
+	 * This is the delete order function
+	 * It is a soft delete
+	 * Details please check order entity
+	 * @SQLDelete is added to order entity for soft deletion
+	 */
 	@Override
 	public void deleteById(UUID orderId) {
 		Order order = getById(orderId);
