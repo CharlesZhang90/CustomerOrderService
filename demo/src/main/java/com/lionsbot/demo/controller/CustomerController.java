@@ -30,11 +30,6 @@ public class CustomerController {
 		return ResponseEntity.ok().body(new CustomerDTO(customerService.getById(customerId)));
 	}
 	
-	@PostMapping
-	public ResponseEntity<CustomerDTO> createCustomer(@Valid @RequestBody CustomerDTO customerDto) {
-		return ResponseEntity.ok().body(new CustomerDTO(customerService.create(customerDto, Role.Customer)));
-	}
-	
 	@PutMapping("/changepassword/{customerId}")
 	public ResponseEntity<String> updatePassword(@PathVariable UUID customerId, @RequestBody String newPassword) {
 		customerService.updatePassword(customerId, newPassword);

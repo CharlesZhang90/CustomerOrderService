@@ -42,12 +42,6 @@ public class AdminController {
 	@Autowired
 	private ShipmentService shipmentService;
 	
-	//allow to create an admin
-	@PostMapping
-	public ResponseEntity<CustomerDTO> createAdmin(@RequestBody CustomerDTO customerDto) {
-		return ResponseEntity.ok().body(new CustomerDTO(customerService.create(customerDto, Role.Admin)));
-	}
-	
 	//allow admin get all customers
 	@GetMapping("/customers")
 	public ResponseEntity<List<CustomerDTO>> findAllCustomers(){
