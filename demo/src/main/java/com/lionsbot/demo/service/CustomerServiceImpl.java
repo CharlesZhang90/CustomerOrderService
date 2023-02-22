@@ -64,8 +64,7 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	@Transactional
 	public void updatePassword(UUID customerId, String password) {
-		Customer customer = customerRepository.findById(customerId)
-				  .orElseThrow(() -> new EntityNotFoundException("Customer with id: " + customerId + " not found."));
+		Customer customer = getById(customerId);
 		customer.setPassword(passwordEncoder.encode(password));
 		customerRepository.save(customer);
 	}
@@ -78,8 +77,7 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	@Transactional
 	public void deleteById(UUID customerId) {
-		Customer customer = customerRepository.findById(customerId)
-				  .orElseThrow(() -> new EntityNotFoundException("Customer with id: " + customerId + " not found."));
+		Customer customer = getById(customerId);
 		customerRepository.delete(customer);
 	}
 
