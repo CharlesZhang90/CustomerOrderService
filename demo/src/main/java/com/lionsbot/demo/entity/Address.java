@@ -5,6 +5,8 @@ import java.util.UUID;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
+import com.lionsbot.demo.dto.CustomerDTO;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,7 +14,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -44,6 +45,13 @@ public class Address {
 	
 	@Column(name="deleted")
 	private boolean deleted = Boolean.FALSE;
+	
+	public Address(CustomerDTO customerDto) {
+		this.address1 = customerDto.getAddress1();
+		this.address2 = customerDto.getAddress2();
+		this.postalCode = Integer.parseInt(customerDto.getPostalCode());
+		this.country = customerDto.getCountry().toUpperCase();
+	}
 	
 }
 

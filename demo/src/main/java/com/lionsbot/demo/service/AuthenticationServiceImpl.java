@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.lionsbot.demo.config.JwtService;
 import com.lionsbot.demo.dto.AuthenticationRequestDTO;
 import com.lionsbot.demo.dto.AuthenticationResponseDTO;
+import com.lionsbot.demo.entity.Customer;
 import com.lionsbot.demo.repository.CustomerRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -26,8 +27,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 		authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(authenticationRequestDto.getUserName(), authenticationRequestDto.getPassword())
 				);
-		var customer = customerRepository.findByCustomerName(authenticationRequestDto.getUserName()).orElseThrow();
-		var jwtToken = jwtService.generateToken(customer);
+		Customer customer = customerRepository.findByCustomerName(authenticationRequestDto.getUserName()).orElseThrow();
+		String jwtToken = jwtService.generateToken(customer);
 		return AuthenticationResponseDTO.builder()
 				.token(jwtToken)
 				.build();

@@ -10,6 +10,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.lionsbot.demo.dto.CustomerDTO;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -30,7 +31,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -103,4 +103,10 @@ public class Customer implements UserDetails {
 		return true;
 	}
 
+	public Customer(CustomerDTO customerDto, Role role) {
+		this.customerName = customerDto.getCustomerName();
+		this.email = customerDto.getEmail();
+		this.contactNo = customerDto.getContactNo();
+		this.role = role;
+	}
 }

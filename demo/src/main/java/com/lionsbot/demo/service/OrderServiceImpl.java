@@ -2,6 +2,7 @@ package com.lionsbot.demo.service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.stereotype.Service;
@@ -33,8 +34,7 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	@Transactional
 	public List<Order> getByCustomerId(UUID customerId) {
-		Customer customer = customerService.getById(customerId);
-		return customer.getOrders();
+		return customerService.getById(customerId).getOrders();
 	}
 	
 	@Override
@@ -48,23 +48,18 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	@Transactional
 	public Order create(UUID customerId, OrderDTO orderDto) {
-		Customer customer = customerService.getById(customerId);
-		Order order = new Order();
-		order.setCustomer(customer);
-		order.setNumberOfItems(orderDto.getNumberOfItems());
-		order.setOrderDate(LocalDate.now());
-		order.setTotalPrice(orderDto.getTotalPrice());
-		return orderRepository.save(order);
+		return orderRepository.save(new Order(customerService.getById(customerId), orderDto));
 	}
 	
 	//customer should not be able to update shipment, shipment should be done by admin
 	@Override
 	@Transactional
 	public Order update(UUID orderId, OrderDTO orderUpdateDto) {
-		Order order = getById(orderId);
-		order.setTotalPrice(orderUpdateDto.getTotalPrice());
-		order.setNumberOfItems(orderUpdateDto.getNumberOfItems());
-		return orderRepository.save(order);
+		return orderRepository.save(Optional.of(getById(orderId))
+											.map(o -> {o.setTotalPrice(orderUpdateDto.getTotalPrice());
+													   o.setNumberOfItems(orderUpdateDto.getNumberOfItems());
+													   return o;})
+											.get());
 	}
 	
 	/*
@@ -75,8 +70,7 @@ public class OrderServiceImpl implements OrderService {
 	 */
 	@Override
 	public void deleteById(UUID orderId) {
-		Order order = getById(orderId);
-		orderRepository.delete(order);	
+		orderRepository.delete(getById(orderId));	
 	}
 
 }

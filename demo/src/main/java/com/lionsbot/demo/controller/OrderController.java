@@ -32,21 +32,19 @@ public class OrderController {
 	@GetMapping
 	@PreAuthorize("hasAnyRole('Admin')")
 	public ResponseEntity<List<OrderDTO>> findAllOrders(){
-		List<OrderDTO> OrderDtos = orderService.getAll()
-					   						   .stream()
-					   						   .map(OrderDTO::new)
-					   						   .collect(Collectors.toList());
-		return ResponseEntity.ok().body(OrderDtos);
+		return ResponseEntity.ok().body(orderService.getAll()
+				   									.stream()
+				   									.map(OrderDTO::new)
+				   									.collect(Collectors.toList()));
 	}
 	
 	//Fetch all orders to a specific customer by customer id
 	@GetMapping("/{customerId}")
 	public ResponseEntity<List<OrderDTO>> findAllOrdersByCustomerId(@PathVariable UUID customerId){
-    	List<OrderDTO> orderDtos = orderService.getByCustomerId(customerId)
-    										   .stream()
-    										   .map(OrderDTO::new)
-    										   .collect(Collectors.toList());
-    	return ResponseEntity.ok(orderDtos);
+    	return ResponseEntity.ok(orderService.getByCustomerId(customerId)
+				   							 .stream()
+				   							 .map(OrderDTO::new)
+				   							 .collect(Collectors.toList()));
 	}
 		
 	// Create an order based on customer id

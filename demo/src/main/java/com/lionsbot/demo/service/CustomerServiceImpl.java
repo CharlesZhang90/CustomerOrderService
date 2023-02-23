@@ -1,6 +1,7 @@
 package com.lionsbot.demo.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -43,17 +44,9 @@ public class CustomerServiceImpl implements CustomerService {
 		//check if customer existence base on email
 		customerRepository.findByCustomerName(customerDto.getCustomerName())
 						  .ifPresent((customer)-> {throw new EntityAlreadyExistException("Customer already Exists.");});
-		Customer customer = new Customer();
-		customer.setCustomerName(customerDto.getCustomerName());
-		customer.setEmail(customerDto.getEmail());
+		Customer customer = new Customer(customerDto, role);
 		customer.setPassword(passwordEncoder.encode(customerDto.getPassword()));
-		customer.setContactNo(customerDto.getContactNo());
-		customer.setRole(role);
-		Address address = new Address();
-		address.setAddress1(customerDto.getAddress1());
-		address.setAddress2(customerDto.getAddress2());
-		address.setPostalCode(Integer.parseInt(customerDto.getPostalCode()));
-		address.setCountry(customerDto.getCountry().toUpperCase());
+		Address address = new Address(customerDto);
 		address.setCustomer(customer);
 		customer.setAddress(address);
 		return customerRepository.save(customer);
@@ -62,9 +55,10 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	@Transactional
 	public void updatePassword(UUID customerId, String password) {
-		Customer customer = getById(customerId);
-		customer.setPassword(passwordEncoder.encode(password));
-		customerRepository.save(customer);
+		customerRepository.save(Optional.of(getById(customerId))
+										.map(c -> {c.setPassword(passwordEncoder.encode(password));
+												   return c;})
+										.get());
 	}
 	/*
 	 * This is the delete customer function
@@ -75,8 +69,7 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	@Transactional
 	public void deleteById(UUID customerId) {
-		Customer customer = getById(customerId);
-		customerRepository.delete(customer);
+		customerRepository.delete(getById(customerId));
 	}
 
 }

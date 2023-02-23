@@ -7,6 +7,7 @@ import java.util.UUID;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
+import com.lionsbot.demo.dto.OrderDTO;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -54,5 +55,12 @@ public class Order {
 	
 	@Column(name="deleted")
 	private boolean deleted = Boolean.FALSE;
-		
+
+	public Order(Customer customer, OrderDTO orderDto) {
+		this.customer = customer;
+		this.totalPrice = orderDto.getTotalPrice();
+		this.numberOfItems = orderDto.getNumberOfItems();
+		this.orderDate = LocalDate.now();
+	}
+	
 }

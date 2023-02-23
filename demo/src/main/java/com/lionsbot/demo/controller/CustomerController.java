@@ -29,11 +29,10 @@ public class CustomerController {
 	@PreAuthorize("hasAuthority('Admin')")
 	@GetMapping
 	public ResponseEntity<List<CustomerDTO>> findAllCustomers(){
-		List<CustomerDTO> customerDtos = customerService.getAll()
-					  								    .stream()
-					                                    .map(CustomerDTO::new)
-					                                    .collect(Collectors.toList());
-		return ResponseEntity.ok().body(customerDtos);
+		return ResponseEntity.ok().body(customerService.getAll()
+				    								   .stream()
+                                                       .map(CustomerDTO::new)
+                                                       .collect(Collectors.toList()));
 	}
 	
 	@GetMapping("/{customerId}")
