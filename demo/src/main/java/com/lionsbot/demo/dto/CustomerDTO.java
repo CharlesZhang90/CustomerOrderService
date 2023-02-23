@@ -3,6 +3,7 @@ package com.lionsbot.demo.dto;
 import java.util.UUID;
 
 import com.lionsbot.demo.entity.Customer;
+import com.lionsbot.demo.validation.Password;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
@@ -28,6 +29,7 @@ public class CustomerDTO {
 	@NotNull(message="Email should not be null.")
 	private String email;
 	
+	@Password
 	private String password;
 	
 	@NotNull(message="Contact number should not be null.")

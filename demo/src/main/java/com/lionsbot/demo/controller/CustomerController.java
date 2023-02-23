@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.lionsbot.demo.dto.CustomerDTO;
 import com.lionsbot.demo.entity.Role;
 import com.lionsbot.demo.service.CustomerService;
+import com.lionsbot.demo.validation.Password;
 
 import jakarta.validation.Valid;
 
@@ -57,7 +58,7 @@ public class CustomerController {
 	}
 	
 	@PutMapping("/customers/changepassword/{customerId}")
-	public ResponseEntity<String> updatePassword(@PathVariable UUID customerId, @RequestBody String newPassword) {
+	public ResponseEntity<String> updatePassword(@PathVariable UUID customerId, @RequestBody @Password String newPassword) {
 		customerService.updatePassword(customerId, newPassword);
 		return ResponseEntity.ok().body("Password Updated.");
 	}
