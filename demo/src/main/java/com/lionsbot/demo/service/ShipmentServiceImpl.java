@@ -3,7 +3,6 @@ package com.lionsbot.demo.service;
 import java.time.LocalDate;
 import java.util.UUID;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,18 +14,17 @@ import com.lionsbot.demo.repository.OrderRepository;
 import com.lionsbot.demo.repository.ShipmentRepository;
 
 import jakarta.persistence.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 public class ShipmentServiceImpl implements ShipmentService {
 	
-	@Autowired
-	private MethodRepository methodRepository;
+	private final MethodRepository methodRepository;
 	
-	@Autowired
-	private ShipmentRepository shipmentRepository;
+	private final ShipmentRepository shipmentRepository;
 	
-	@Autowired
-	private OrderRepository orderRepository;
+	private final OrderRepository orderRepository;
 	
 	@Override
 	@Transactional

@@ -1,7 +1,6 @@
 package com.lionsbot.demo.controller;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,20 +15,20 @@ import com.lionsbot.demo.service.AuthenticationService;
 import com.lionsbot.demo.service.CustomerService;
 
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/v1/auth")
+@RequiredArgsConstructor
 public class AuthenicationController {
 	
-	@Autowired
-	private CustomerService customerService;
+	private final CustomerService customerService;
 	
-	@Autowired
-	private AuthenticationService authenticationService;
+	private final AuthenticationService authenticationService;
 	
 	//allow to create an admin
 	@PostMapping("/register/admins")
-	public ResponseEntity<CustomerDTO> createAdmin(@RequestBody CustomerDTO customerDto) {
+	public ResponseEntity<CustomerDTO> createAdmin(@Valid @RequestBody CustomerDTO customerDto) {
 		return ResponseEntity.ok().body(new CustomerDTO(customerService.create(customerDto, Role.Admin)));
 	}
 	

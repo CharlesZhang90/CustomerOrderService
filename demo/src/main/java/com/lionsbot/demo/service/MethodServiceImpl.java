@@ -2,18 +2,19 @@ package com.lionsbot.demo.service;
 
 import java.util.UUID;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.lionsbot.demo.entity.Method;
 import com.lionsbot.demo.repository.MethodRepository;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class MethodServiceImpl implements MethodService {
 	
-	@Autowired
-	private MethodRepository methodRepository;
+	private final MethodRepository methodRepository;
 
 	@Override
 	@Transactional

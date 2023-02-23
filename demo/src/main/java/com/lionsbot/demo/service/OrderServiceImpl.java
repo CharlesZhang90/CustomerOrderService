@@ -4,34 +4,25 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.lionsbot.demo.dto.OrderDTO;
 import com.lionsbot.demo.entity.Customer;
-import com.lionsbot.demo.entity.Method;
+
 import com.lionsbot.demo.entity.Order;
-import com.lionsbot.demo.entity.Shipment;
-import com.lionsbot.demo.repository.CustomerRepository;
-import com.lionsbot.demo.repository.MethodRepository;
 import com.lionsbot.demo.repository.OrderRepository;
-import com.lionsbot.demo.repository.ShipmentRepository;
 
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
 	
-	@Autowired
-	private OrderRepository orderRepository;
+	private final OrderRepository orderRepository;
 	
-	@Autowired
-	private CustomerService customerService;
-	
-	@Autowired
-	private CustomerRepository customerRepository;
+	private final CustomerService customerService;
 	
 	@Override
 	@Transactional
@@ -63,12 +54,7 @@ public class OrderServiceImpl implements OrderService {
 		order.setNumberOfItems(orderDto.getNumberOfItems());
 		order.setOrderDate(LocalDate.now());
 		order.setTotalPrice(orderDto.getTotalPrice());
-		Order savedOrder = orderRepository.save(order);
-		List<Order> orders = customer.getOrders();
-		orders.add(savedOrder);
-		customer.setOrders(orders);
-		customerRepository.save(customer);
-		return savedOrder;
+		return orderRepository.save(order);
 	}
 	
 	//customer should not be able to update shipment, shipment should be done by admin

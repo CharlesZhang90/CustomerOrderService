@@ -1,6 +1,5 @@
 package com.lionsbot.demo.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
@@ -10,39 +9,17 @@ import com.lionsbot.demo.dto.AuthenticationRequestDTO;
 import com.lionsbot.demo.dto.AuthenticationResponseDTO;
 import com.lionsbot.demo.repository.CustomerRepository;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class AuthenticationServiceImpl implements AuthenticationService {
 	
-	@Autowired
-	private CustomerRepository customerRepository;
+	private final CustomerRepository customerRepository;
 	
-//	@Autowired
-//	private PasswordEncoder passwordEncoder;
+	private final JwtService jwtService;
 	
-	@Autowired
-	private JwtService jwtService;
-	
-	@Autowired
-	private AuthenticationManager authenticationManager;
-
-//	@Override
-//	public CustomerDTO register(CustomerDTO customerDto) {
-//		Customer customer = Customer.builder()
-//						   .customerName(customerDto.getCustomerName())
-//						   .email(customerDto.getEmail())
-//						   .password(passwordEncoder.encode(customerDto.getPassword()))
-//						   .contactNo(customerDto.getContactNo())
-//						   .role(Role.Admin)
-//						   .build();
-//		Address address = new Address();
-//		address.setAddress1(customerDto.getAddress1());
-//		address.setAddress2(customerDto.getAddress2());
-//		address.setPostalCode(customerDto.getPostalCode());
-//		address.setCountry(customerDto.getCountry().toUpperCase());
-//		address.setCustomer(customer);
-//		customer.setAddress(address);
-//		return new CustomerDTO(customerRepository.save(customer));
-//	}
+	private final AuthenticationManager authenticationManager;
 
 	@Override
 	public AuthenticationResponseDTO authenticate(AuthenticationRequestDTO authenticationRequestDto) {

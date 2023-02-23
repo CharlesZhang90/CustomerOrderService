@@ -47,21 +47,15 @@ public class Customer implements UserDetails {
 	private UUID customerId;
 	
 	@Column(name="customer_name")
-	@NotNull
 	private String customerName;
 	
-	@NotNull
-	@Email(message = "Invalid Email addresss.")
 	@Column(name="email")
 	private String email;
 	
-	@NotNull
 	@Column(name="password")
 	private String password;
 	
-	@NotNull
 	@Column(name="contact_no")
-	@Size(min = 8, max = 8, message = "Contact Number should be within 8 digits.")
 	private String contactNo;
 	
 	@OneToMany(mappedBy = "customer", cascade=CascadeType.ALL)
