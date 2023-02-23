@@ -31,11 +31,7 @@ public class ShipmentServiceImpl implements ShipmentService {
 	public Shipment createShipment(UUID orderId, LocalDate shipmentDate, String methodName) {
 		Order order = orderRepository.findById(orderId).orElseThrow(() -> new EntityNotFoundException("Order with id: " + orderId + " not found."));
 		Method method = methodRepository.findByMethodName(methodName).orElseThrow(() -> new EntityNotFoundException("Method not found."));
-		Shipment shipment = new Shipment();
-		shipment.setShipmentDate(shipmentDate);
-		shipment.setMethod(method);
-		shipment.setOrder(order);
-		return shipmentRepository.save(shipment);
+		return shipmentRepository.save(new Shipment(order, method, shipmentDate));
 	}
 
 	@Override
