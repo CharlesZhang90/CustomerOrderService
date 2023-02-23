@@ -4,11 +4,11 @@ import java.time.LocalDate;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import jakarta.persistence.EntityNotFoundException;
-import jakarta.validation.ConstraintViolationException;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
@@ -30,19 +30,19 @@ public class GlobalExceptionHandler {
 	}
 	
 	// handling validation exception
-	@ExceptionHandler(ConstraintViolationException.class)
-	public ResponseEntity<?> customValidationExceptionHandling(ConstraintViolationException exception){
+	@ExceptionHandler(MethodArgumentNotValidException.class)
+	public ResponseEntity<?> customValidationExceptionHandling(MethodArgumentNotValidException exception){
 		ErrorDetails errorDetails = 
-				new ErrorDetails(LocalDate.now(), "Validation Error", exception.getMessage());
+				new ErrorDetails(LocalDate.now(), "Validation Error", exception.getBindingResult().getFieldError().getDefaultMessage());
 		return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
 	}
 	
-//	// handling Other exceptions
-//	@ExceptionHandler(Exception.class)
-//	public ResponseEntity<?> globalExceptionHandling(Exception exception){
-//		ErrorDetails errorDetails = 
-//				new ErrorDetails(LocalDate.now(), "Other Service Error", exception.getMessage());
-//		return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
-//	}
+	// handling Other exceptions
+	@ExceptionHandler(Exception.class)
+	public ResponseEntity<?> globalExceptionHandling(Exception exception){
+		ErrorDetails errorDetails = 
+				new ErrorDetails(LocalDate.now(), "Internal Service Error", exception.getMessage());
+		return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
+	}
 	
 }
