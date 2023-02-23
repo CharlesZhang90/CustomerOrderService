@@ -30,7 +30,7 @@ public class OrderController {
 	
 	// allow admin get all orders
 	@GetMapping
-	@PreAuthorize("hasAnyRole('Admin')")
+	@PreAuthorize("hasAuthority('Admin')")
 	public ResponseEntity<List<OrderDTO>> findAllOrders(){
 		return ResponseEntity.ok().body(orderService.getAll()
 				   									.stream()
@@ -61,7 +61,7 @@ public class OrderController {
 	
 	// allow admin to delete an order
 	@DeleteMapping("/{orderId}")
-	@PreAuthorize("hasAnyRole('Admin')")
+	@PreAuthorize("hasAuthority('Admin')")
 	public ResponseEntity<String> deleteOrder(@PathVariable UUID orderId) {
 		orderService.deleteById(orderId);
 		return ResponseEntity.ok().body("Order successfully deleted.");
