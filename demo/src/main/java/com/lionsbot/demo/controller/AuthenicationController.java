@@ -11,6 +11,7 @@ import com.lionsbot.demo.dto.AuthenticationRequestDTO;
 import com.lionsbot.demo.dto.AuthenticationResponseDTO;
 import com.lionsbot.demo.service.AuthenticationService;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -21,7 +22,7 @@ public class AuthenicationController {
 	private final AuthenticationService authenticationService;
 		
 	@PostMapping("/login")
-	public ResponseEntity<AuthenticationResponseDTO> login(@RequestBody AuthenticationRequestDTO AuthenticationRequestDto){
+	public ResponseEntity<AuthenticationResponseDTO> login(@Valid @RequestBody AuthenticationRequestDTO AuthenticationRequestDto){
 		return ResponseEntity.ok(authenticationService.authenticate(AuthenticationRequestDto));
 	}
 	
