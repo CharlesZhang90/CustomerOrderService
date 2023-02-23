@@ -27,13 +27,13 @@ public class AuthenicationController {
 	private final AuthenticationService authenticationService;
 	
 	//allow to create an admin
-	@PostMapping("/register/admins")
+	@PostMapping("/admins/register")
 	public ResponseEntity<CustomerDTO> createAdmin(@Valid @RequestBody CustomerDTO customerDto) {
 		return ResponseEntity.ok().body(new CustomerDTO(customerService.create(customerDto, Role.Admin)));
 	}
 	
 	//allow to create a customer
-	@PostMapping("/register/customers")
+	@PostMapping("/customers/register")
 	public ResponseEntity<CustomerDTO> createCustomer(@RequestBody CustomerDTO customerDto) {
 		return ResponseEntity.ok().body(new CustomerDTO(customerService.create(customerDto, Role.Customer)));
 	}

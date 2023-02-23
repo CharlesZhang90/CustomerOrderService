@@ -47,7 +47,7 @@ public class CustomerController {
 	}
 	
 	// allow admin to delete a customer
-	@DeleteMapping("/customers/{customerId}")
+	@DeleteMapping("/{customerId}")
 	@PreAuthorize("hasAnyRole('Admin')")
 	public ResponseEntity<String> deleteCustomer(@PathVariable UUID customerId) {
 		customerService.deleteById(customerId);

@@ -1,6 +1,5 @@
 package com.lionsbot.demo.service;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -8,7 +7,6 @@ import java.util.UUID;
 import org.springframework.stereotype.Service;
 
 import com.lionsbot.demo.dto.OrderDTO;
-import com.lionsbot.demo.entity.Customer;
 
 import com.lionsbot.demo.entity.Order;
 import com.lionsbot.demo.repository.OrderRepository;

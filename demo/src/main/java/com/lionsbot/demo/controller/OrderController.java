@@ -60,7 +60,7 @@ public class OrderController {
 	}
 	
 	// allow admin to delete an order
-	@DeleteMapping("/orders/{orderId}")
+	@DeleteMapping("/{orderId}")
 	@PreAuthorize("hasAnyRole('Admin')")
 	public ResponseEntity<String> deleteOrder(@PathVariable UUID orderId) {
 		orderService.deleteById(orderId);
