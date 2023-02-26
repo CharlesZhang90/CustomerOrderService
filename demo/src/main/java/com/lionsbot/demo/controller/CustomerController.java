@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,13 +21,14 @@ import com.lionsbot.demo.service.CustomerService;
 import com.lionsbot.demo.validation.Password;
 
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/v1")
+@RequiredArgsConstructor
 public class CustomerController {
-	
-	@Autowired
-	private CustomerService customerService;
+		
+	private final CustomerService customerService;
 	
 	//allow to create an admin
 	@PostMapping("/admins/register")
