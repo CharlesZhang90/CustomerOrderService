@@ -1,0 +1,496 @@
+{
+	"info": {
+		"_postman_id": "f9715afb-1412-432d-985e-708b1df6c4bf",
+		"name": "Lionsbot",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3472465"
+	},
+	"item": [
+		{
+			"name": "Lionsbot",
+			"item": [
+				{
+					"name": "Register Admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customerName\": \"Layla\",\r\n    \"email\": \"mart.com\",\r\n    \"password\": \"12345678\",\r\n    \"contactNo\": 98765432,\r\n    \"address1\":\"radom1\",\r\n    \"address2\":\"random2\",\r\n    \"postalCode\":642196,\r\n    \"country\":\"CHINA\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/admins/register",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"admins",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register Customer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customerName\": \"louise\",\r\n    \"email\": \"louise@gmail.com\",\r\n    \"password\": \"pppppp\",\r\n    \"contactNo\": 88213211,\r\n    \"address1\":\"left\",\r\n    \"address2\":\"right\",\r\n    \"postalCode\":537321,\r\n    \"country\":\"USA\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/customers/register",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"customers",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Admin login",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\":\"lilie\",\r\n    \"password\":\"kkkkkkk\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/auth/login",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Customer login",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\":\"John Week\",\r\n    \"password\":\"lllllllll\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/auth/login",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Admin password",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYXJ0aW4iLCJpYXQiOjE2NzcxMjkxMTAsImV4cCI6MTY3NzEzMDU1MH0.-NvnBylbq5WyDFNPYGVff9LCRZJ54EXgtOEiDEZap-U",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "martina",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/customers/changepassword/3ef6cb75-d66e-4563-9d88-78945bde295f",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"customers",
+								"changepassword",
+								"3ef6cb75-d66e-4563-9d88-78945bde295f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Customer password",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKb2huIFdlZWsiLCJpYXQiOjE2NzcxMjYzNzMsImV4cCI6MTY3NzEyNzgxM30.rFI7x5TGFpV1749y2XrHeCjiiXMnWbhcYAGl71tQSco",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "lllllllll",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/changepassword/26be8c70-afaf-4f89-8711-65163910cd6b",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"changepassword",
+								"26be8c70-afaf-4f89-8711-65163910cd6b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all customers",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtaXlhIiwiaWF0IjoxNjc3MTMyMzc4LCJleHAiOjE2NzcxMzM4MTh9.I7TyZ5REx4vx3wEJFsfh45dH6xTi8QhBrDjtDqTeCsA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/customers",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all corders",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYXJ0aW4iLCJpYXQiOjE2NzcxMzA0MjgsImV4cCI6MTY3NzEzMTg2OH0.FJOI5A3vLjItO74rUJ4ccGbn6D1J97TDc6wHMmIC0pc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/orders",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create an order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKb2huIFdlZWsiLCJpYXQiOjE2NzcxMjEwOTksImV4cCI6MTY3NzEyMjUzOX0.f0qAvafmeD5oHNqY6QCZ2L2noaEP_GcJw0sdCv_oTHg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"totalPrice\":\"39990\",\r\n    \"numberOfItems\":\"1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/orders/e3d4a02e-bafe-4e2c-965b-d4c6133c8d91",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"orders",
+								"e3d4a02e-bafe-4e2c-965b-d4c6133c8d91"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get corders on Customer",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/orders/e3d4a02e-bafe-4e2c-965b-d4c6133c8d91",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"orders",
+								"e3d4a02e-bafe-4e2c-965b-d4c6133c8d91"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update an Order",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"totalPrice\":\"39990\",\r\n    \"numberOfItems\":\"1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/orders/2a415e72-1bc9-49de-aa55-8ca4897e6485",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"orders",
+								"2a415e72-1bc9-49de-aa55-8ca4897e6485"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYXJ0aW4iLCJpYXQiOjE2NzcxMzA0MjgsImV4cCI6MTY3NzEzMTg2OH0.FJOI5A3vLjItO74rUJ4ccGbn6D1J97TDc6wHMmIC0pc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/orders/b0db1f68-010a-4d71-b4bf-48a45894f970",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"orders",
+								"b0db1f68-010a-4d71-b4bf-48a45894f970"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Customer",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/admin/customers/5564f179-3e72-4d94-873e-d10ab57fa1b3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"customers",
+								"5564f179-3e72-4d94-873e-d10ab57fa1b3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create method",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "Ninja Van",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/methods",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"methods"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create shipment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYXJ0aW4iLCJpYXQiOjE2NzcxMzA0MjgsImV4cCI6MTY3NzEzMTg2OH0.FJOI5A3vLjItO74rUJ4ccGbn6D1J97TDc6wHMmIC0pc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/shipments/b0db1f68-010a-4d71-b4bf-48a45894f970?shipmentDate=2023-06-21&methodName=Ninja Van",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"shipments",
+								"b0db1f68-010a-4d71-b4bf-48a45894f970"
+							],
+							"query": [
+								{
+									"key": "shipmentDate",
+									"value": "2023-06-21"
+								},
+								{
+									"key": "methodName",
+									"value": "Ninja Van"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
