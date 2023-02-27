@@ -1,6 +1,6 @@
 1.  Run Customer Order Service project
 
-    $ Make sure java, maven installed and environment params set correctly
+    $ Make sure java, maven and lombok installed and environment params set correctly
 
     $ cd demo
 
